@@ -1,10 +1,12 @@
 import React from 'react';
 import {
   TouchableHighlight,
+  TouchableOpacity,
   ScrollView,
   StyleSheet,
   Text,
   View,
+  FlatList,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -43,21 +45,43 @@ const App = () => {
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionHeaderText}>The Article Title</Text>
           </View>
-          <View style={styles.sectionDetails}>
-            <Text style={styles.sectionDetailsText}>
-              You may use this template on any site, anywhere, for free just
-              please leave the link back to me in the footer. This template
-              validates XHTML Strict 1.0, CSS Validates as well; enjoy :)
-            </Text>
-            <Text style={styles.sectionDetailsText}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer
-              mi. Vivamus sit amet neque vitae sapien bibendum sodales.
-              Curabitur elementum. Duis imperdiet. Donec eleifend porttitor
-              sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse
-              potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit
-              dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis.
-              Sed vehicula pellentesque quam.
-            </Text>
+          <View style={styles.topAndSideNav}>
+            <View style={styles.sectionDetailsTop}>
+              <Text style={styles.sectionDetailsText}>
+                You may use this template on any site, anywhere, for free just
+                please leave the link back to me in the footer. This template
+                validates XHTML Strict 1.0, CSS Validates as well; enjoy :)
+              </Text>
+              <Text style={styles.sectionDetailsText}>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                Integer mi. Vivamus sit amet neque vitae sapien bibendum
+                sodales. Curabitur elementum. Duis imperdiet. Donec eleifend
+                porttitor sapien. Praesent leo. Quisque auctor velit sed tellus.
+                Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec
+                commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam
+                lobortis risus ut felis. Sed vehicula pellentesque quam.
+              </Text>
+            </View>
+            <View style={styles.sideNav}>
+              <Text style={styles.sideNavLink}>Links:</Text>
+              <FlatList
+                data={[
+                  {key: 'Web Design'},
+                  {key: 'Templates'},
+                  {key: 'Marketing'},
+                  {key: 'SEO'},
+                  {key: 'Programming'},
+                  {key: 'Consulting'},
+                ]}
+                renderItem={({item}) => (
+                  <TouchableOpacity>
+                    <Text style={styles.sideNavItem}>{item.key}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+          </View>
+          <View>
             <Text style={styles.sectionDetailsText}>
               Vestibulum augue quam, interdum id, congue semper, convallis non,
               velit. Quisque augue tortor, tristique ac, scelerisque eget,
@@ -126,7 +150,9 @@ const styles = StyleSheet.create({
   sectionHeader: {
     marginBottom: 10,
   },
-  sectionDetails: {},
+  sectionDetailsTop: {
+    width: '70%',
+  },
   sectionHeaderText: {
     color: '#2e4b6c',
     fontWeight: 'bold',
@@ -141,6 +167,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 20,
   },
+  sectionContainer: {
+    flexDirection: 'column',
+  },
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -150,6 +179,24 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: '#4d5c4b',
+  },
+  sideNav: {
+    marginHorizontal: 10,
+    marginVertical: 50,
+  },
+  sideNavItem: {
+    lineHeight: 25,
+    fontWeight: 'bold',
+    color: '#2b3638',
+  },
+  sideNavLink: {
+    marginBottom: 20,
+    lineHeight: 22,
+    fontWeight: 'bold',
+    color: '#2b3638',
+  },
+  topAndSideNav: {
+    flexDirection: 'row',
   },
 });
 export default App;
