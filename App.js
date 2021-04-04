@@ -22,25 +22,30 @@ const App = () => {
           <Text style={styles.subHeader}>A design by Bryant Smith.</Text>
         </View>
 
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <LinearGradient colors={['#dff8fd', '#94c2cc']} style={styles.navBar}>
-            <TouchableHighlight underlayColor="#94c2cc" onPress={pressed}>
-              <Text style={styles.navText}>Home</Text>
-            </TouchableHighlight>
-            <TouchableHighlight underlayColor="#94c2cc" onPress={pressed}>
-              <Text style={styles.navText}>About</Text>
-            </TouchableHighlight>
-            <TouchableHighlight underlayColor="#94c2cc" onPress={pressed}>
-              <Text style={styles.navText}>Portfolio</Text>
-            </TouchableHighlight>
-            <TouchableHighlight underlayColor="#94c2cc" onPress={pressed}>
-              <Text style={styles.navText}>Services</Text>
-            </TouchableHighlight>
-            <TouchableHighlight underlayColor="#94c2cc" onPress={pressed}>
-              <Text style={styles.navText}>Contact</Text>
-            </TouchableHighlight>
+        <View style={styles.navBar}>
+          <LinearGradient colors={['#dff8fd', '#94c2cc']} style={{flex: 1}}>
+            <FlatList
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              style={{flex: 1}}
+              data={[
+                {key: 'Home'},
+                {key: 'About'},
+                {key: 'Portfolio'},
+                {key: 'Services'},
+                {key: 'Contact'},
+              ]}
+              renderItem={({item}) => (
+                <View style={styles.navItem}>
+                  <TouchableHighlight underlayColor="#94c2cc" onPress={pressed}>
+                    <Text style={styles.navText}>{item.key}</Text>
+                  </TouchableHighlight>
+                </View>
+              )}
+            />
           </LinearGradient>
-        </ScrollView>
+        </View>
+
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionHeaderText}>The Article Title</Text>
@@ -125,21 +130,17 @@ const styles = StyleSheet.create({
     marginLeft: 28,
   },
   navBar: {
-    flexDirection: 'row',
+    flex: 1,
     shadowOffset: {width: 5, height: 5},
     shadowColor: 'black',
     shadowOpacity: 0.8,
     elevation: 2,
   },
   navText: {
+    flex: 1,
     paddingHorizontal: 35,
     color: '#252f33',
-    padding: 18,
-    fontWeight: 'bold',
-  },
-  navTextActive: {
-    color: '#bfd3b7',
-    padding: 15,
+    paddingVertical: 18,
     fontWeight: 'bold',
   },
   section: {
